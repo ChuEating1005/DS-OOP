@@ -392,7 +392,7 @@ void Dungeon::handleEvent(Object *object)
                     }
                     else
                     {
-                        cout << "\nSorry, you can wear this item....\n"; 
+                        cout << "\nSorry, you can't wear this item....\n"; 
                     }
                 }
             }
