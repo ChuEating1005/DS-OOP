@@ -81,7 +81,7 @@ void Dungeon::createMap()
 {
     // Creating Map
     srand(time(NULL));
-    // basic weapon for each class
+    //* basic weapon for each class
     map<string, Item *> weapon;
     weapon["Saber"] = new Item("Bronze Sword", "Sword", 10, 0, 10, 10);
     weapon["Archer"] = new Item("Wood Bow", "Bow", 10, 5, 15, 0);
@@ -90,7 +90,7 @@ void Dungeon::createMap()
     weapon["Assassin"] = new Item("Bronze Dagger", "Dagger", 0, 0, 30, 0);
     weapon["Rider"] = new Item("Leather Whip", "Whip", 5, 0, 15, 10);
     weapon["Berserker"] = new Item("Bronze Battle Axe", "Axe", 0, 0, 15, 15);
-    // treasure room weapon
+    //* treasure room weapon
     map<string, Item *> treasure;
     treasure["Saber"] = new Item("Frie Sword", "Sword", 20, 0, 30, 30);
     treasure["Archer"] = new Item("Frie Bow", "Bow", 30, 15, 45, 0);
@@ -99,7 +99,7 @@ void Dungeon::createMap()
     treasure["Assassin"] = new Item("Fire Dagger", "Dagger", 0, 0, 90, 0);
     treasure["Rider"] = new Item("Fire Whip", "Whip", 15, 0, 45, 30);
     treasure["Berserker"] = new Item("Fire Battle Axe", "Axe", 0, 0, 45, 45);
-    // legendary weapon dropped when defeat the Warrior
+    //* legendary weapon dropped when defeat the Warrior
     map<string, Item *> artifact;
     artifact["Saber"] = new Item("\033[0;32;31mExcalibur\033[m", "Sword", 100, 50, 200, 50);
     artifact["Archer"] = new Item("\033[0;32;31mEa\033[m", "Bow", 120, 60, 180, 0);
@@ -109,31 +109,38 @@ void Dungeon::createMap()
     artifact["Rider"] = new Item("\033[0;32;31mMassive Wire\033[m", "Whip", 60, 0, 180, 120);
     artifact["Berserker"] = new Item("\033[0;32;31mDawn of Echoes\033[m", "Axe", 50, 0, 300, 50);
     vector<pair<int, Item> > products[6];
-    // Merchant's
+
+    //* Merchant's
     products[0].push_back(make_pair(40, Item("XenoBlade", "Sword", 20, 0, 30, 20)));
     products[0].push_back(make_pair(40, Item("Truestrike", "Bow", 15, 5, 50, 0)));
     products[0].push_back(make_pair(40, Item("Gae Bolg", "Lance", 10, 0, 50, 10)));
     products[0].push_back(make_pair(40, Item("Avada Kedavra", "Staff", 0, 20, 10, 0)));
     products[0].push_back(make_pair(40, Item("Sacrifice", "Dagger", 0, 0, 70, 0)));
     products[0].push_back(make_pair(40, Item("Eternal Rest", "Whip", 30, 0, 40, 0)));
+    products[0].push_back(make_pair(10, Item("Dungeon Map", "Map", 0, 0, 0, 0)));
     products[0].push_back(make_pair(20, Item("Apocalypse", "Shield", 20, 0, 0, 40)));
     products[0].push_back(make_pair(25, Item("Crystal Heart", "Necklace", 0, 40, 0, 0)));
     products[0].push_back(make_pair(30, Item("King's Brand", "Helmet", 20, 20, 10, 0)));
-    // The Priest's
+
+    //* The Priest's
     products[1].push_back(make_pair(0, Item("Cross", "Item", 0, 0, 0, 0)));
     products[1].push_back(make_pair(0, Item("Holy Grail", "Item", 0, 0, 0, 0)));
-    // Gilles de Rais's
+    
+    //* Gilles de Rais's
     products[2].push_back(make_pair(0, Item("Elegant Key", "Key", 0, 0, 0, 0)));
-    // Warrior's
+
+    //* Warrior's
     products[3].push_back(make_pair(0, Item("\033[1;36mAbyss Shriek\033[m", "Helmet", 30, 30, 70, 40)));
     products[3].push_back(make_pair(0, Item("\033[1;36mMothwing Cloak\033[m", "Armor", 50, 20, 30, 50)));
     products[3].push_back(make_pair(0, Item("\033[1;36mShade Cloak\033[m", "Pants", 30, 100, 30, 0)));
     products[3].push_back(make_pair(0, Item("\033[1;36mIsma's Tear\033[m", "Necklace", 30, 100, 30, 0)));
     products[3].push_back(make_pair(0, Item("\033[1;36mMonarch Wings\033[m", "Boots", 30, 100, 30, 0)));
     products[3].push_back(make_pair(0, Item("\033[1;36mDreamshield\033[m", "Shield", 40, 0, 0, 100)));
-    // Jeanne d'Arc
+    
+    //* Jeanne d'Arc
     products[4].push_back(make_pair(0, Item("\033[1;36mLuminosite Eternelle\033[m", "Armor", 500, 500, 500, 500)));
-    // creating objects for each room
+
+    //* creating objects for each room
     vector<Object *> objects[16];
     // room 0 (start point)
     objects[0].push_back(weapon[player.getOccupation()]);
@@ -156,22 +163,22 @@ void Dungeon::createMap()
     switch (rand() % 6)
     {
     case 0:
-        objects[6].push_back(new Item("Abyss Shriek", "Helmet", 30, 30, 70, 40));
+        objects[6].push_back(new Item("\033[1;36mAbyss Shriek\033[m", "Helmet", 30, 30, 70, 40));
         break;
     case 1:
-        objects[6].push_back(new Item("Mothwing Cloak", "Armor", 50, 20, 30, 50));
+        objects[6].push_back(new Item("\033[1;36mMothwing Cloak\033[m", "Armor", 50, 20, 30, 50));
         break;
     case 2:
-        objects[6].push_back(new Item("Shade Cloak", "Pants", 30, 100, 30, 0));
+        objects[6].push_back(new Item("\033[1;36mShade Cloak\033[m", "Pants", 30, 100, 30, 0));
         break;
     case 3:
-        objects[6].push_back(new Item("Isma's Tear", "Necklace", 30, 100, 30, 0));
+        objects[6].push_back(new Item("\033[1;36mIsma's Tear\033[m", "Necklace", 30, 100, 30, 0));
         break;
     case 4:
-        objects[6].push_back(new Item("Monarch Wings", "Boots", 30, 100, 30, 0));
+        objects[6].push_back(new Item("\033[1;36mMonarch Wings\033[m", "Boots", 30, 100, 30, 0));
         break;
     case 5:
-        objects[6].push_back(new Item("Dreamshield", "Shield", 40, 0, 0, 100));
+        objects[6].push_back(new Item("\033[1;36mDreamshield\033[m", "Shield", 40, 0, 0, 100));
         break;
     default:
         break;
@@ -401,6 +408,574 @@ void Dungeon::handleEvent(Object *object)
         }
     }
 }
+void Dungeon::handleMap()
+{
+    switch(player.getCurrentRoom()->getIndex())
+    {
+        case 0:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|       |                   |       |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|   \033[1;33mX\033[m   |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 1:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|       |                   |       |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |   \033[1;33mX\033[m   |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 2:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|       |                   |       |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|   \033[1;33mX\033[m   |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 3:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|       |                   |       |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|   \033[1;33mX\033[m   |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 5:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|       |                   |       |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |   \033[1;33mX\033[m   |*****|       |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 6:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|   \033[1;33mX\033[m   |                   |       |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 7:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |   \033[1;33mX\033[m   |*****|       |                   |       |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 8:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|       |                   |   \033[1;33mX\033[m   |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 9:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|       |                   |       |*****|   \033[1;33mX\033[m   |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 10:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |   \033[1;33mX\033[m   |*****|       |*****|       |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|       |                   |       |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 11:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |   \033[1;33mX\033[m   |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|       |                   |       |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 12:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|   \033[1;33mX\033[m   |*****|       |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|       |                   |       |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        case 13:
+            cout << " _________________________________________________________________________________________________ \n";
+            cout << "|                                                                                                 |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                              |       |                   |       |                              |\n";
+            cout << "|                               -------                     -------                               |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |*****|   \033[1;33mX\033[m   |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                  *           Boss            *           Secret                 |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                |       |*****|       |                   |       |*****|       |                |\n";
+            cout << "|                |       |     |       |                   |       |     |       |                |\n";
+            cout << "|                 -------       -------                     -------       -------                 |\n";
+            cout << "|                                  *                           *           Altar                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                                  *                           *                                  |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                              |       |*****|       |*****|       |     |  ???  |                |\n";
+            cout << "|                              |       |     |       |     |       |     |       |                |\n";
+            cout << "|                               -------       -------       -------       -------                 |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                                *             *                                  |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                            |       |*****|       |                              |\n";
+            cout << "|                                            |       |     |       |                              |\n";
+            cout << "|                                             -------       -------                               |\n";
+            cout << "|                                                            Start         X : Player's Position  |\n";
+            cout << " _________________________________________________________________________________________________ \n";
+            break;
+        default:
+            break;
+    }
+}
+
 
 /* Deal with all game initial setting       */
 /* Including create player, create map etc  */
@@ -408,6 +983,7 @@ void Dungeon::startGame()
 {
 
     char sel;
+    cout << "\033[2J";
     cout << "\033[1;33mDo you want to enter the Dungeon? (Y/N)\033[m\n"
          << "\nYour Choice: ";
     cin >> sel;
@@ -419,10 +995,15 @@ void Dungeon::startGame()
     if (sel == 'N' || sel == 'n')
     {
         cout << "Ok, fine. Bye...\n";
+        return;
     }
     createPlayer();
     createMap();
-    cout << "\n\033[1;33mFriendly Remind :\033[m \n > Beat a Monster can earn 10 coins.\n > You can use money to trade with NPC.\n > There's some SECRETs within the whole dungeon. Try to find all of it if you can.\n\n\033[1;33mGood Luck!!!\033[m\n\n---------------------------------------------------------\n\n";
+    cout << "\n\033[1;33mFriendly Remind :\033[m \n"
+    << " > Beat a Monster can earn 10 coins.\n"
+    << " > You can use money to trade with NPC.\n"
+    << " > You can't use weapons that don't correspond to your class.\n"
+    << " > There's some SECRETs within the whole dungeon. Try to find all of it if you can.\n\n\033[1;33mGood Luck!!!\033[m\n\n---------------------------------------------------------\n\n";
 }
 
 /* Deal with the player's action     */
@@ -495,9 +1076,7 @@ void Dungeon::chooseAction(vector<Object *> things)
             player.setAttack(player.getAttack() + 20);
             player.setDefense(player.getDefense() + 20);
             cout << "\n\033[1;36mYou've accept God's blessing, you are feeling very good now.\033[0m\n";
-            player.changeRoom(player.getPreviousRoom());
-            rooms[8].setRightRoom(NULL);
-            player.setPreviousRoom(NULL);
+            player.getCurrentRoom()->popObject(things[0]);
             return;
         }
         else
@@ -572,7 +1151,6 @@ void Dungeon::chooseAction(vector<Object *> things)
     }
     else if (things.size() > 0 && things[0]->getTag() == "Trap") // Special Event: Trap
     {
-        cout << "\n\n\033[1;31mYou've fallen into a trap, and you eccounter a monster. \nDefeat it or you'll die....\033[0m\n\n";
         if (things[1]->triggerEvent(&player) != true)
         {
             player.setCurrentHealth(0);
@@ -641,6 +1219,13 @@ void Dungeon::chooseAction(vector<Object *> things)
             option++;
         }
     }
+    if(player.checkMap())
+    {
+        cout << option << ". Show Map\n";
+        decision[option] = 'M'; // stand for MAp
+        decision[option + 32] = 'M';
+        option++;
+    }
     cout << option << ". Show Status\n";
     decision[option] = 's'; // stand for status
     decision[option + 32] = 's';
@@ -672,6 +1257,9 @@ void Dungeon::chooseAction(vector<Object *> things)
     case 'm':
         handleMovement();
         cout << "\033[2J";
+        break;
+    case 'M':
+        handleMap();
         break;
     default:
         break;

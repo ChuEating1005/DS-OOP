@@ -6,6 +6,7 @@ Monster::Monster(string name, int maxHealth, int maxMagic, int attack, int defen
 }
 bool Monster::triggerEvent(Object *object)
 {
+    Player *player = dynamic_cast<Player *>(object);
     cout << "\033[2J";
     if (getName() == "\033[1;36mBlue-Eyes White Dragon\033[m")
     {
@@ -56,8 +57,69 @@ bool Monster::triggerEvent(Object *object)
         cout << "\033[1;36m                                       .^.    .^^     ^^                                                                \n";
         cout << "\033[1;36m                                        .      :.                                                                       \033[m\n";
     }
-    cout << fight ;
-    Player *player = dynamic_cast<Player *>(object);
+    else if (getName() == "\033[0;32;31mThe Baphomet\033[m")
+    {
+        cout << "\033[0;32;31m                                                                                           .    ..~.      .:. . ...:    \n";
+        cout << "\033[0;32;31m                                                                                       .:.::. :!7!!^^~^..^7?7^::!       \n";
+        cout << "\033[0;32;31m                                                                              .~!!!7^..:~!^:. ^!7~!7?JJ!!?7!~!~^.       \n";
+        cout << "\033[0;32;31m                                                                             .^!~~~~!7?!^~!JJ~~~!77!!?J?J!              \n";
+        cout << "\033[0;32;31m                                                         .:^^:::.          .~~^:.::~!!!!7???7!!7??7!77?J~               \n";
+        cout << "\033[0;32;31m                                                      :~7JYYY55YJ?!~:      :~^...^~^:.:^~~~~~7?7: :~~~^.                \n";
+        cout << "\033[0;32;31m                                                   :!J5PPGGGGGBGPPYJJ7:     ^!^..:.. .^^^~7??5Y.                        \n";
+        cout << "\033[0;32;31m                                                .~?PGGGBBGGGPGGBBGP55YJ7:    .:7~.  .~!~?JJJJ5Y       .                 \n";
+        cout << "\033[0;32;31m                       .~^:                   :75GGBGGG5J!^:..:!JPGGGP5YJ^     .?5?7YGGYYPYJJGG7::^~7?!.                \n";
+        cout << "\033[0;32;31m                        .~7JJ7~:.       ..^!?5G##BGPY7^.         :?PGGP55Y~      JP55PJ.:J??5GBBGP5Y!:                  \n";
+        cout << "\033[0;32;31m                           .!JPGPP5YYYY5PG####BGPJ!:               7PGGPYJ?:     :YY5? .JYJYGP7!!^.                     \n";
+        cout << "\033[0;32;31m                               :~7JY55555P5J?!^:.           .:::^^^~YGBGP55?     .J5P7~JY?JPGJ                          \n";
+        cout << "\033[0;32;31m                                                        .^7YPGB#######BBGP5Y^   .!Y5B#PYY5GG5:                          \n";
+        cout << "\033[0;32;31m                                                     :!YG##&&&&&&&@@@&#BGP55?   ~GY5B5JJP#BY:                           \n";
+        cout << "\033[0;32;31m                                                 .^?PB&&&###&&&&@&57~!PBBGP55~^^:JYPB5PBBGG?                            \n";
+        cout << "\033[0;32;31m                                              .~JG#########&&&@&5^.^^~7GBGP555GGY5YP&GB#BG#B7                           \n";
+        cout << "\033[0;32;31m                                           .^JPBBBBB#####&&&@&5^ .~J5PBBBBBGPGBGPP5G&#BB#&##B~                          \n";
+        cout << "\033[0;32;31m                                         :7YGGGGPGBB##&&&&&@B! .:!YG#&&&&####BBBGGPB###&&##BBP^                         \n";
+        cout << "\033[0;32;31m                                       .75PGGPPGBBBB##&&&&&5: .^J#&&@@@&&&&#####BBB##&@@&&&###P.                        \n";
+        cout << "\033[0;32;31m                                      :J5PGGPPGBBGB##&&&@@#. ~5B#&&&&&@@&&@&BG#&####&&@@@@@@&&#P:                       \n";
+        cout << "\033[0;32;31m                                     ~YPPGPPGBBGB##&&&@@@@&7 ^5G#BBB#&@@@@&G&&G##&###&&&&&###BBG^                       \n";
+        cout << "\033[0;32;31m                                   .75PGPPPGBGGB##&&&@@@@@@&?JG#&&@&&@&@@@&##&&##B#&@&@&#&#B##BB5.                      \n";
+        cout << "\033[0;32;31m                                  :?5GGPPGBBGG###&&&&@@@@&&@@&&&&@&#&#&#&@&&####GGB@@@@&###B##BGG~                      \n";
+        cout << "\033[0;32;31m                                 ^YPGBPPGBBGB####&&&@@@@@&#&&&&&&&#&#&&#@@&####BBB&@@@@&##&B#&BGBJ                      \n";
+        cout << "\033[0;32;31m                                ~5GGGGGB#BBB######&&@@@@@@&&&#&&@&#&#&#&&@&&##&BBB&@@@&&&#&####BBP:                     \n";
+        cout << "\033[0;32;31m                               7PPPGGBB##B#######&&&&&&&&@&&&&&&&&&@####&&&&###GGG#@@&&&&&&&###BBB!                     \n";
+        cout << "\033[0;32;31m                             .?5PPGBBBB####&####&&&&&&&&&&&&&#B&&&&@&#&#&#&&&####&@@&#&&&&&&&##BBGY                     \n";
+        cout << "\033[0;32;31m                            :?Y5PGBGGB########&#&&##&&&&&&&&#GB#&&@@@@&#&#&&&@&@@@@@&&&&&&&####GGGP:                    \n";
+        cout << "\033[0;32;31m                           :?J5PPGGGGBBB#####&######&#&&&&&&GB##&&@@@@@&&&&#&&&@@@@&&&&&&&&####BGGG7                    \n";
+        cout << "\033[0;32;31m                          ^?J5PPPPGBBGB####B#####B####&#&&&&#&&&&&&BBG#@@@&#&&@@@@@&&#&&&&&#####GGGY                    \n";
+        cout << "\033[0;32;31m                         ^JJ5PPPPGGBGB###B!:GB##B#######&&&#&&&&@@@#B5G@@@@&&&@@@G&@&&&&&&&&#B##BGGP:                   \n";
+        cout << "\033[0;32;31m                        ^JJ5PPPPGGGGB###G~  5BBGB##B##B#&&#PB#&&@@@@@@&&@@@&&&@@&@@@@&B#&&&&#B###GGG7                   \n";
+        cout << "\033[0;32;31m                       ~JJYPP55GGGGB###5:  .PBGB##B##B####GPB#&@@@&&&&&@@@@@&&@G7P#@&&BG#&&&&BB##BGGY                   \n";
+        cout << "\033[0;32;31m                      ~JJY5P55PGGGB##BJ.   .PGB##BB#BB###BPG##&@@@&&&@@@#5YY5#@P!?P&GYPGG#&&&#B###GGP^                  \n";
+        cout << "\033[0;32;31m                     ~JJY5P55PGGPB#BG7      :?GBGB#BGB###BG##&@&@@@@@@@B7!7?YB&P!77G&B55G###&#BB##BGG7                  \n";
+        cout << "\033[0;32;31m                    !JJY5P55PPPPB#B5^         .7YGBBG###BBB#&&B^5@@@&G77JJJ5P##Y~?J7JBGY5BGGGBBBB#BGGY.                 \n";
+        cout << "\033[0;32;31m                   !JJY5P555PPGBGY~              .^!77YGGG###&7 ^&&B7 .!5Y5PPBB!:JJ~~7?YB##BBGGPPPGGGP~                 \n";
+        cout << "\033[0;32;31m                  !JJ555555PPP5!.                  .~J5GB##&&5 ^JBBJ^!77?JJYJJ?~^???JJ:~PGB####BBGGPPP57^.              \n";
+        cout << "\033[0;32;31m                .!JJ555YY5PPJ^                   ^?5PPG###BP7.^55YYJJY55P5YJJ5??JJY5J5J::^!7JGBB####G5PPP55^            \n";
+        cout << "\033[0;32;31m               .7JJ555YY55J^                    :5PGPPPBPY?7??JJJY5PP55PPYYJP5^:?55PGP5YJJYYYYJJJJYYGPPBBGG5~.          \n";
+        cout << "\033[0;32;31m              .7JJ555YY5J^                     .?PP#&##PGPYJJJJJJJY5PPPPPP5Y5?77JGGPP555PP5YYJJJJJYPGBGBBBB#GY.         \n";
+        cout << "\033[0;32;31m             .7JJ555YYY!.                     :5#BB#GGBB###G555555P5PPPPGGGPYY555GGGGGGPP5555555PB#GPPGGBBB#BB~         \n";
+        cout << "\033[0;32;31m            .7JJ555YY!.                       !B&&##GGGBBBB##P55PPPGGGGGGGBPPGBGGBBBGGPP555YYY5GGGPGGBBB&&&&#B^         \n";
+        cout << "\033[0;32;31m           .7JJY55Y!:                         ^G&&&&&#####BB##BBGGGGBBBBBGPPBBBBGBBGGPPPPPP55PPPPPPGB&&@&##G7:          \n";
+        cout << "\033[0;32;31m          .7JJY5Y!.                            !5PB##&&&&##BGPPGGGGGGPPPPPPGBGGGPGBGGGGPPPPPPPPGGGB&@&##BY^.            \n";
+        cout << "\033[0;32;31m         .7JJYJ!.                                 ^P##&&&##BBGPPPPPGGGGPPPGGPPGPPPGGBB###BBB####&&@&#J^JG5              \n";
+        cout << "\033[0;32;31m        .?JJ?~.                                    .^Y&&&&&&&#BGGGGBBBBP5YJ!^~7J5G####&#&&&&&@@&#BP!:   7G~             \n";
+        cout << "\033[0;32;31m       .?J?~.                                         !5#&&&&&@&&##&&&&#BY!7JJ5G#&&&&&&&@@@&&B57^.       ~J.            \n";
+        cout << "\033[0;32;31m      .??!.                                            .^JPG##&&&&&&&&&&###&@@@@@@@&##G5Y?7~~:            ^:            \n";
+        cout << "\033[0;32;31m     .7!:                                                 .::~7YG#####&&&&&&&&&&&##P?^                                  \n";
+        cout << "\033[0;32;31m    .!:                                                         .:~5##&&&&&&&&&&&##BGY^                                 \n";
+        cout << "\033[0;32;31m    :                                                           .!P##&&&&&#BGB#@@@&&#BGJ^.                              \n";
+        cout << "\033[0;32;31m                                                            .~?5G#&&&#G5?!~. .^?5B&&####BP?~^.                          \n";
+        cout << "\033[0;32;31m                                                            ?#&&&&#P?^           .!YGBB####BBG5~                        \n";
+        cout << "\033[0;32;31m                                                            .^~!!!:                 .:^~!?YPP5J:                        \033[m\n";
+    }
+    else if (player->getCurrentRoom()->getIndex() == 14)
+    {
+        cout << "\n\n\033[1;31mYou've fallen into a trap, and you eccounter a monster. \nDefeat it or you'll die....\033[0m\n\n";
+    }
+    if(getName() != "\033[0;32;31mThe Baphomet\033[m" ) cout << fight;
     while (!player->checkIsDead())
     {
         char option = 'A';
@@ -117,7 +179,8 @@ bool Monster::triggerEvent(Object *object)
         case 1:
         case 2:
         case 3:
-            if(decision[input]==3) cout << "\033[2J";
+            if (decision[input] == 3)
+                cout << "\033[2J";
             player->skill[decision[input] - 1].getScript();
             if (player->skill[decision[input] - 1].getType().first == "Demage")
             {

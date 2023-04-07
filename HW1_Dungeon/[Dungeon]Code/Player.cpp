@@ -101,6 +101,17 @@ void Player::popItem(string name)
         }
     }
 }
+bool Player::checkMap()
+{
+    for (auto i = backpack.begin(); i!= backpack.end(); i++)
+    {
+        if(i->getTag() == "Map")
+        {
+            return true;
+        }
+    }
+    return false;
+}
 void Player::equip()
 {
     /* check whether player already equip this equipment */

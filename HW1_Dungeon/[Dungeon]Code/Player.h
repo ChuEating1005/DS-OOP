@@ -20,6 +20,7 @@ private:
     Room *previousRoom;
     map<string, Item> equipment;
     vector<Item> backpack;
+
 public:
     Player();
     Player(string, string, int, int, int, int, int);
@@ -29,8 +30,9 @@ public:
     void equip();
     void changeEquipment(string, Item *);
     void changeWeapon(Item *);
-    void increaseStates(int, int, int, int);
     void changeRoom(Room *);
+    void increaseStates(int, int, int, int);
+    bool checkMap();
     void showStatus();
     void showEquipment();
     void showBackpack();

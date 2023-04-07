@@ -27,6 +27,9 @@ public:
     /* Deal with player's iteraction with objects in that room */
     void handleEvent(Object *);
 
+    /* Show the current location of the player and the whole dungeon map*/
+    void handleMap();
+
     /* Deal with all game initial setting       */
     /* Including create player, create map etc  */
     void startGame();
