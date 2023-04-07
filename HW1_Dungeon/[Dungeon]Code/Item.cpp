@@ -5,7 +5,6 @@ Item::Item() : Object() {}
 Item::Item(string name, string type, int health, int magic, int attack, int defense)
     : Object(name, type)
 {
-    setType(type);
     setHealth(health);
     setMagic(magic);
     setAttack(attack);
@@ -38,10 +37,7 @@ int Item::getMagic()
 {
     return magic;
 }
-string Item::getType()
-{
-    return type;
-}
+
 void Item::setHealth(int health)
 {
     this->health = health;
@@ -57,8 +53,4 @@ void Item::setDefense(int defense)
 void Item::setMagic(int magic)
 {
     this->magic = magic;
-}
-void Item::setType(string)
-{
-    this->type = type;
 }
