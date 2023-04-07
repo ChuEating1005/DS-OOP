@@ -36,7 +36,7 @@ bool GameCharacter::checkEnoughMagic(int MP)
     else
         return false;
 }
-int GameCharacter::useMaigc(int mp)
+void GameCharacter::useMaigc(int mp)
 {
     setCurrentMagic(getCurrentMagic() - mp);
     cout << "Current MP: " << getCurrentMagic() << endl;

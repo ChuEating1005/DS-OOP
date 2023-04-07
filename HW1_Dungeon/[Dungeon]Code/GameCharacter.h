@@ -23,7 +23,7 @@ public:
     void takeDamage(int);
     void healing(int);
     bool checkEnoughMagic(int);
-    int useMaigc(int);
+    void useMaigc(int);
 
     /* Set & Get function*/
     void setMaxHealth(int);
