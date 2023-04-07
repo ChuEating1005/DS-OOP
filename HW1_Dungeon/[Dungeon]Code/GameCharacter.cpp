@@ -68,6 +68,8 @@ void GameCharacter::setCurrentMagic(int magic)
 {
     if (magic < 0)
         this->currentMagic = 0;
+    else if(magic > this->getMaxMagic())
+        this->currentMagic = this->getMaxMagic();
     else
         this->currentMagic = magic;
 }

@@ -30,51 +30,55 @@ Player::Player(string name, string occupation, int maxHealth, int maxMagic, int 
     setPreviousRoom(NULL);
     setOccupation(occupation);
     setWeapon(Item("Empty", w[occupation], 0, 0, 0, 0));
+    initializeSkill(occupation);
+}
+
+// basic function
+void Player::initializeSkill(string occupation)
+{
     if (occupation == "Saber")
     {
         setSkill(Skill("Karisuma", "ATKup", 10, 10, "Attack UP!\n"),0);
         setSkill(Skill("Kagayakeru Michi", "MPup", 10, 0, "MP up up!!\n"),1);
-        setSkill(Skill("Excalibur", "Demage", 100, 40, "\n\033[1;33m「───束ねるは星の息吹、輝ける命の奔流。受けるが良い!『約束された勝利の剣 (エクスカリバー) 』ーーー！！」\033[m"),2);
+        setSkill(Skill("Excalibur", "Demage", 100, 40, "\n\033[1;33m「───束ねるは星の息吹、輝ける命の奔流。受けるが良い!『約束された勝利の剣』ーーー！！」\033[m"),2);
     }
     else if (occupation == "Archer")
     {
         setSkill(Skill("Shinig", "Heal", 30, 5, "Heal\n"), 0);
         setSkill(Skill("Gate of Babylon", "MPup", 20, 0, "MP up up!!\n"), 1);
-        setSkill(Skill("Enuma Elish", "Demage", 150, 40, "\033[1;33m\n「───裁きの時だ。世界を割くは我が乖離剣。受けよ! 『天地乖離す開闢の星(エヌマ・エリシュ)』ーーー！！」\033[m\n"), 2);
+        setSkill(Skill("Enuma Elish", "Demage", 150, 40, "\033[1;33m\n「───裁きの時だ。世界を割くは我が乖離剣。受けよ! 『天地乖離す開闢の星』ーーー！！」\033[m\n"), 2);
     }
     else if (occupation == "Lancer")
     {
-        setSkill(Skill("Karisuma", "ATKup", 10, 5, "Attack UP!\n"), 0);
-        setSkill(Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!"), 1);
-        setSkill(Skill("Gae Bulg", "Demage", 150, 40, "\033[1;33m\n「───刺し穿ち……突き穿つ! 『貫き穿つ死翔の槍 (ゲイ･ボルク･オルタナティブ)』ーーー! ! 」\033[m\n"), 2);
+        setSkill(Skill("Strike!", "ATKup", 10, 10, "Attack UP!\n"), 0);
+        setSkill(Skill("Heal!", "Heal", 30, 10, "Heal!!"), 1);
+        setSkill(Skill("Gae Bulg", "Demage", 150, 40, "\033[1;33m\n「───刺し穿ち……突き穿つ! 『貫き穿つ死翔の槍』ーーー! ! 」\033[m\n"), 2);
     }
     else if (occupation == "Caster")
     {
-        setSkill(Skill("Eiyuu Sakusei", "DEFup", 30, 30, "DEF UP!\n"), 0);
+        setSkill(Skill("Eiyuu Sakusei", "DEFup", 30, 20, "DEF UP!\n"), 0);
         setSkill(Skill("Bless of Avalon", "MPup", 30, 0, "MP up up!!"), 1);
-        setSkill(Skill("Garden of Avalon", "ATKup", 50, 50, "...."), 2);
+        setSkill(Skill("Garden of Avalon", "ATKup", 50, 40, "\033[1;33m\n「———— 罪無き者のみ通るがいい ”。『永久に閉ざされた理想郷』ーーー! ! 」\033[m\n"), 2);
     }
     else if (occupation == "Assassin")
     {
-        setSkill(Skill("maryoku souten", "ATKup", 10, 5, "Attack UP!\n"), 0);
-        setSkill(Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!"), 1);
-        setSkill(Skill("Tubame Gaesi", "Demage", 50, 10, "Tubame Gaesi"), 2);
+        setSkill(Skill("Attack Up!", "ATKup", 20, 10, "Attack UP!\n"), 0);
+        setSkill(Skill("Attack UpUpUp!!!", "ATKup", 50, 20, "Attack up up!!"), 1);
+        setSkill(Skill("Tubame Gaesi", "Demage", 50, 40, "\033[1;33m\n「無名とは言え剣に捧げた我が人生だ! 死力を尽くせぬのならその信念…力づくでこじ開けようか……秘剣・燕返し!!」\033[m\n"), 2);
     }
     else if (occupation == "Rider")
     {
-        setSkill(Skill("Karisuma", "ATKup", 10, 5, "Attack UP!\n"), 0);
-        setSkill(Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!"), 1);
-        setSkill(Skill("Excalibur", "Demage", 50, 10, "Ex.......caliburrrrrr!!!!!!!!!\n"), 2);
+        setSkill(Skill("Karisuma", "ATKup", 10, 10, "Attack UP!\n"), 0);
+        setSkill(Skill("Riding!!", "MPup", 15, 0, "MP up up!!"), 1);
+        setSkill(Skill("Hazimari no ZyuurinSeiha", "Demage", 50, 40, "\033[1;33m\n「いずれ彼方に至るため――今こそ此処に、一歩を刻まん!『始まりの蹂躙制覇 (ブケファラス) 』! ! 」\033[m\n"), 2);
     }
     else if (occupation == "Berserker")
     {
-        setSkill(Skill("Karisuma", "ATKup", 10, 5, "Attack UP!\n"), 0);
-        setSkill(Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!"), 1);
-        setSkill(Skill("Excalibur", "Demage", 50, 10, "Ex.......caliburrrrrr!!!!!!!!!\n"), 2);
+        setSkill(Skill("DEFENSE UP", "ATKup", 30, 10, "Defense UP!\n"), 0);
+        setSkill(Skill("ATTACK UP", "DEFup", 30, 10, "Attack up!!"), 1);
+        setSkill(Skill("Syasatu Su Momogasira", "Demage", 50, 40, "\n\033[1;33m「2&@$*@$(*$@(8&$&@#$!!!!.......『射殺す百頭』ーーー!」\033[m\n"), 2);
     }
 }
-
-// basic function
 void Player::addItem(Item item)
 {
     backpack.push_back(item);
@@ -147,7 +151,7 @@ void Player::equip()
         if (s == 'A')
         {
             cout << "Sorry, You don't have any corresponding weapon.\n";
-            cout << "\033[1;33mDo you want to wear other equipment? (Y/N)\033[m\nYes or No: ";
+            cout << "\n\033[1;33mDo you want to wear other equipment? (Y/N)\033[m\nYes or No: ";
             char ss;
             cin >> ss;
             switch (ss)

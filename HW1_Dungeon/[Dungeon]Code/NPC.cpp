@@ -23,7 +23,7 @@ bool NPC::triggerEvent(Object *object)
     }
     else
     {
-        cout << "\n\" " << getScript() << " \"\n\n";
+        cout << "\n\" \033[1;36m" << getScript() << "\033[m \"\n\n";
         char option = 'A';
         for (auto& it : commodity)
         {

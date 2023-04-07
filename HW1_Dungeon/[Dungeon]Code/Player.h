@@ -21,7 +21,6 @@ private:
     Room *previousRoom;
     map<string, Item> equipment;
     vector<Item> backpack;
-
 public:
     Player();
     Player(string, string, int, int, int, int, int);
@@ -36,6 +35,7 @@ public:
     void showStatus();
     void showEquipment();
     void showBackpack();
+    void initializeSkill(string);
     /* Virtual function that you need to complete   */
     /* In Player, this function should show the     */
     /* status of player.                            */

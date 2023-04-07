@@ -1,14 +1,13 @@
 #ifndef RECORD_H_INCLUDED
 #define RECORD_H_INCLUDED
 
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <sstream>
-#include "Item.h"
+#include <bits/stdc++.h>
 #include "Monster.h"
 #include "NPC.h"
 #include "Player.h"
+#include "Item.h"
+#define path1 "Save_Player.txt"
+#define path2 "Save_Rooms.txt"
 
 using namespace std;
 
@@ -22,7 +21,7 @@ class Record
 private:
     void savePlayer(Player*, ofstream&);
     void saveRooms(vector<Room>&, ofstream&);
-    void loadPlayer(Player*, ifstream&);
+    void loadPlayer(Player*, ifstream&, vector<Room>&);
     void loadRooms(vector<Room>&, ifstream&);
 
 public:

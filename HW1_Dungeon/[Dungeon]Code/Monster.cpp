@@ -8,7 +8,7 @@ bool Monster::triggerEvent(Object *object)
 {
     Player *player = dynamic_cast<Player *>(object);
     cout << "\033[2J";
-    if (getName() == "\033[1;36mBlue-Eyes White Dragon\033[m")
+    if (getName() == "Blue-Eyes White Dragon")
     {
         cout << "\033[1;36m                                                .:^.                                                                    \n";
         cout << "\033[1;36m                                             .:~7:                .:^          :^^::.                                   \n";
@@ -57,7 +57,7 @@ bool Monster::triggerEvent(Object *object)
         cout << "\033[1;36m                                       .^.    .^^     ^^                                                                \n";
         cout << "\033[1;36m                                        .      :.                                                                       \033[m\n";
     }
-    else if (getName() == "\033[0;32;31mThe Baphomet\033[m")
+    else if (getName() == "The Baphomet")
     {
         cout << "\033[0;32;31m                                                                                           .    ..~.      .:. . ...:    \n";
         cout << "\033[0;32;31m                                                                                       .:.::. :!7!!^^~^..^7?7^::!       \n";
@@ -119,7 +119,7 @@ bool Monster::triggerEvent(Object *object)
     {
         cout << "\n\n\033[1;31mYou've fallen into a trap, and you eccounter a monster. \nDefeat it or you'll die....\033[0m\n\n";
     }
-    if(getName() != "\033[0;32;31mThe Baphomet\033[m" ) cout << fight;
+    if(getName() != "The Baphomet" ) cout << fight;
     while (!player->checkIsDead())
     {
         char option = 'A';

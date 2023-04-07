@@ -59,8 +59,9 @@ void Dungeon::createPlayer()
     statistic['E'] = statistic['e'] = v5;
     statistic['F'] = statistic['f'] = v6;
     statistic['G'] = statistic['g'] = v7;
-    cout << "\n\033[1;33mType your name:\033[m ";
-    cin >> name;
+    cout << "\n\033[1;33mType your name:\033[m";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, name);
     cout << "\n\033[1;33mChoose your character's class:\033[m \n";
     cout << "A. Saber     (HP: 70, MP: 10, ATK: 30, DEF: 20)\n"
          << "B. Archer    (HP: 50, MP: 20, ATK: 50, DEF: 10)\n"
@@ -81,139 +82,142 @@ void Dungeon::createMap()
 {
     // Creating Map
     srand(time(NULL));
-    //* basic weapon for each class
-    map<string, Item *> weapon;
-    weapon["Saber"] = new Item("Bronze Sword", "Sword", 10, 0, 10, 10);
-    weapon["Archer"] = new Item("Wood Bow", "Bow", 10, 5, 15, 0);
-    weapon["Lancer"] = new Item("Bronze Lance", "Lance", 5, 5, 20, 0);
-    weapon["Caster"] = new Item("Magic Book", "Staff", 0, 20, 10, 0);
-    weapon["Assassin"] = new Item("Bronze Dagger", "Dagger", 0, 0, 30, 0);
-    weapon["Rider"] = new Item("Leather Whip", "Whip", 5, 0, 15, 10);
-    weapon["Berserker"] = new Item("Bronze Battle Axe", "Axe", 0, 0, 15, 15);
-    //* treasure room weapon
-    map<string, Item *> treasure;
-    treasure["Saber"] = new Item("Frie Sword", "Sword", 20, 0, 30, 30);
-    treasure["Archer"] = new Item("Frie Bow", "Bow", 30, 15, 45, 0);
-    treasure["Lancer"] = new Item("Frie Lance", "Lance", 15, 15, 60, 10);
-    treasure["Caster"] = new Item("Fire Ball!", "Staff", 0, 60, 30, 0);
-    treasure["Assassin"] = new Item("Fire Dagger", "Dagger", 0, 0, 90, 0);
-    treasure["Rider"] = new Item("Fire Whip", "Whip", 15, 0, 45, 30);
-    treasure["Berserker"] = new Item("Fire Battle Axe", "Axe", 0, 0, 45, 45);
-    //* legendary weapon dropped when defeat the Warrior
-    map<string, Item *> artifact;
-    artifact["Saber"] = new Item("\033[0;32;31mExcalibur\033[m", "Sword", 100, 50, 200, 50);
-    artifact["Archer"] = new Item("\033[0;32;31mEa\033[m", "Bow", 120, 60, 180, 0);
-    artifact["Lancer"] = new Item("\033[0;32;31mGae Bolg\033[m", "Lance", 60, 60, 240, 40);
-    artifact["Caster"] = new Item("\033[0;32;31mThunderstorm Glaive\033[m", "Staff", 0, 240, 120, 0);
-    artifact["Assassin"] = new Item("\033[0;32;31mTwilight\033[m", "Dagger", 0, 0, 400, 0);
-    artifact["Rider"] = new Item("\033[0;32;31mMassive Wire\033[m", "Whip", 60, 0, 180, 120);
-    artifact["Berserker"] = new Item("\033[0;32;31mDawn of Echoes\033[m", "Axe", 50, 0, 300, 50);
-    vector<pair<int, Item> > products[6];
-
-    //* Merchant's
-    products[0].push_back(make_pair(40, Item("XenoBlade", "Sword", 20, 0, 30, 20)));
-    products[0].push_back(make_pair(40, Item("Truestrike", "Bow", 15, 5, 50, 0)));
-    products[0].push_back(make_pair(40, Item("Gae Bolg", "Lance", 10, 0, 50, 10)));
-    products[0].push_back(make_pair(40, Item("Avada Kedavra", "Staff", 0, 20, 10, 0)));
-    products[0].push_back(make_pair(40, Item("Sacrifice", "Dagger", 0, 0, 70, 0)));
-    products[0].push_back(make_pair(40, Item("Eternal Rest", "Whip", 30, 0, 40, 0)));
-    products[0].push_back(make_pair(10, Item("Dungeon Map", "Map", 0, 0, 0, 0)));
-    products[0].push_back(make_pair(20, Item("Apocalypse", "Shield", 20, 0, 0, 40)));
-    products[0].push_back(make_pair(25, Item("Crystal Heart", "Necklace", 0, 40, 0, 0)));
-    products[0].push_back(make_pair(30, Item("King's Brand", "Helmet", 20, 20, 10, 0)));
-
-    //* The Priest's
-    products[1].push_back(make_pair(0, Item("Cross", "Item", 0, 0, 0, 0)));
-    products[1].push_back(make_pair(0, Item("Holy Grail", "Item", 0, 0, 0, 0)));
-    
-    //* Gilles de Rais's
-    products[2].push_back(make_pair(0, Item("Elegant Key", "Key", 0, 0, 0, 0)));
-
-    //* Warrior's
-    products[3].push_back(make_pair(0, Item("\033[1;36mAbyss Shriek\033[m", "Helmet", 30, 30, 70, 40)));
-    products[3].push_back(make_pair(0, Item("\033[1;36mMothwing Cloak\033[m", "Armor", 50, 20, 30, 50)));
-    products[3].push_back(make_pair(0, Item("\033[1;36mShade Cloak\033[m", "Pants", 30, 100, 30, 0)));
-    products[3].push_back(make_pair(0, Item("\033[1;36mIsma's Tear\033[m", "Necklace", 30, 100, 30, 0)));
-    products[3].push_back(make_pair(0, Item("\033[1;36mMonarch Wings\033[m", "Boots", 30, 100, 30, 0)));
-    products[3].push_back(make_pair(0, Item("\033[1;36mDreamshield\033[m", "Shield", 40, 0, 0, 100)));
-    
-    //* Jeanne d'Arc
-    products[4].push_back(make_pair(0, Item("\033[1;36mLuminosite Eternelle\033[m", "Armor", 500, 500, 500, 500)));
-
-    //* creating objects for each room
-    vector<Object *> objects[16];
-    // room 0 (start point)
-    objects[0].push_back(weapon[player.getOccupation()]);
-    // room 1 (normal monster)
-    objects[1].push_back(new Monster("Blue Slime", 40, 0, 40, 5));
-    objects[1].push_back(new Item("Cross Bow", "Bow", 0, 20, 40, 0));
-    // room 2 (normal monster)
-    objects[2].push_back(new Monster("Red Slime", 50, 0, 40, 10));
-    objects[2].push_back(new Item("Shadow Belle", "Necklace", 0, 0, 15, 0));
-    // room 3 (NPC: merchant)
-    objects[3].push_back(new Monster("Annoying Friend", 150, 0, 5, 0));
-    objects[3].push_back(new NPC("Your Friend's Steve", "\033[1;36mDododo~ do~ dodo~ do~ Steveeeee!\033[0m", products[0]));
-    objects[3].push_back(new Item("Iron Boots", "Boots", 0, 0, 15, 0));
-    // room 5 (NPC: priest)
-    objects[5].push_back(new Monster("Women's Right General", 100, 0, 40, 10));
-    objects[5].push_back(new NPC("The Priest", "\033[1;36mYorokobe syounen. Kimi no moti nozomi wa youyaku kanou.......\033[0m", products[1]));
-    objects[5].push_back(new Item("Iron Shield", "Shield", 0, 0, 0, 20));
-    // room 6 (Little Boss: Dragon)
-    objects[6].push_back(new Monster("\033[1;36mBlue-Eyes White Dragon\033[m", 200, 0, 60, 20));
-    switch (rand() % 6)
+    if(rooms.size() == 0)
     {
-    case 0:
-        objects[6].push_back(new Item("\033[1;36mAbyss Shriek\033[m", "Helmet", 30, 30, 70, 40));
-        break;
-    case 1:
-        objects[6].push_back(new Item("\033[1;36mMothwing Cloak\033[m", "Armor", 50, 20, 30, 50));
-        break;
-    case 2:
-        objects[6].push_back(new Item("\033[1;36mShade Cloak\033[m", "Pants", 30, 100, 30, 0));
-        break;
-    case 3:
-        objects[6].push_back(new Item("\033[1;36mIsma's Tear\033[m", "Necklace", 30, 100, 30, 0));
-        break;
-    case 4:
-        objects[6].push_back(new Item("\033[1;36mMonarch Wings\033[m", "Boots", 30, 100, 30, 0));
-        break;
-    case 5:
-        objects[6].push_back(new Item("\033[1;36mDreamshield\033[m", "Shield", 40, 0, 0, 100));
-        break;
-    default:
-        break;
+        //* basic weapon for each class
+        map<string, Item *> weapon;
+        weapon["Saber"] = new Item("Bronze Sword", "Sword", 10, 0, 10, 10);
+        weapon["Archer"] = new Item("Wood Bow", "Bow", 10, 5, 15, 0);
+        weapon["Lancer"] = new Item("Bronze Lance", "Lance", 5, 5, 20, 0);
+        weapon["Caster"] = new Item("Magic Book", "Staff", 0, 20, 10, 0);
+        weapon["Assassin"] = new Item("Bronze Dagger", "Dagger", 0, 0, 30, 0);
+        weapon["Rider"] = new Item("Leather Whip", "Whip", 5, 0, 15, 10);
+        weapon["Berserker"] = new Item("Bronze Battle Axe", "Axe", 0, 0, 15, 15);
+        //* treasure room weapon
+        map<string, Item *> treasure;
+        treasure["Saber"] = new Item("Frie Sword", "Sword", 20, 0, 30, 30);
+        treasure["Archer"] = new Item("Frie Bow", "Bow", 30, 15, 45, 0);
+        treasure["Lancer"] = new Item("Frie Lance", "Lance", 15, 15, 60, 10);
+        treasure["Caster"] = new Item("Fire Ball!", "Staff", 0, 60, 30, 0);
+        treasure["Assassin"] = new Item("Fire Dagger", "Dagger", 0, 0, 90, 0);
+        treasure["Rider"] = new Item("Fire Whip", "Whip", 15, 0, 45, 30);
+        treasure["Berserker"] = new Item("Fire Battle Axe", "Axe", 0, 0, 45, 45);
+        //* legendary weapon dropped when defeat the Warrior
+        map<string, Item *> artifact;
+        artifact["Saber"] = new Item("Excalibur", "Sword", 100, 50, 200, 50);
+        artifact["Archer"] = new Item("Ea", "Bow", 120, 60, 180, 0);
+        artifact["Lancer"] = new Item("Gae Bolg", "Lance", 60, 60, 240, 40);
+        artifact["Caster"] = new Item("Thunderstorm Glaive\033[m", "Staff", 0, 240, 120, 0);
+        artifact["Assassin"] = new Item("Twilight", "Dagger", 0, 0, 400, 0);
+        artifact["Rider"] = new Item("Massive Wire", "Whip", 60, 0, 180, 120);
+        artifact["Berserker"] = new Item("Dawn of Echoes", "Axe", 50, 0, 300, 50);
+        vector<pair<int, Item> > products[6];
+
+        //* Merchant's
+        products[0].push_back(make_pair(40, Item("XenoBlade", "Sword", 20, 0, 30, 20)));
+        products[0].push_back(make_pair(40, Item("Truestrike", "Bow", 15, 5, 50, 0)));
+        products[0].push_back(make_pair(40, Item("Gae Bolg", "Lance", 10, 0, 50, 10)));
+        products[0].push_back(make_pair(40, Item("Avada Kedavra", "Staff", 0, 20, 10, 0)));
+        products[0].push_back(make_pair(40, Item("Sacrifice", "Dagger", 0, 0, 70, 0)));
+        products[0].push_back(make_pair(40, Item("Eternal Rest", "Whip", 30, 0, 40, 0)));
+        products[0].push_back(make_pair(10, Item("Dungeon Map", "Map", 0, 0, 0, 0)));
+        products[0].push_back(make_pair(20, Item("Apocalypse", "Shield", 20, 0, 0, 40)));
+        products[0].push_back(make_pair(25, Item("Crystal Heart", "Necklace", 0, 40, 0, 0)));
+        products[0].push_back(make_pair(30, Item("King's Brand", "Helmet", 20, 20, 10, 0)));
+
+        //* The Priest's
+        products[1].push_back(make_pair(0, Item("Cross", "Item", 0, 0, 0, 0)));
+        products[1].push_back(make_pair(0, Item("Holy Grail", "Item", 0, 0, 0, 0)));
+        
+        //* Gilles de Rais's
+        products[2].push_back(make_pair(0, Item("Elegant Key", "Key", 0, 0, 0, 0)));
+
+        //* Warrior's
+        products[3].push_back(make_pair(0, Item("Abyss Shriek", "Helmet", 30, 30, 70, 40)));
+        products[3].push_back(make_pair(0, Item("Mothwing Cloak", "Armor", 50, 20, 30, 50)));
+        products[3].push_back(make_pair(0, Item("Shade Cloak", "Pants", 30, 100, 30, 0)));
+        products[3].push_back(make_pair(0, Item("Isma's Tear", "Necklace", 30, 100, 30, 0)));
+        products[3].push_back(make_pair(0, Item("Monarch Wings", "Boots", 30, 100, 30, 0)));
+        products[3].push_back(make_pair(0, Item("Dreamshield", "Shield", 40, 0, 0, 100)));
+        
+        //* Jeanne d'Arc
+        products[4].push_back(make_pair(0, Item("Luminosite Eternelle", "Armor", 500, 500, 500, 500)));
+
+        //* creating objects for each room
+        vector<Object *> objects[16];
+        // room 0 (start point)
+        objects[0].push_back(weapon[player.getOccupation()]);
+        // room 1 (normal monster)
+        objects[1].push_back(new Monster("Blue Slime", 40, 0, 40, 5));
+        objects[1].push_back(new Item("Cross Bow", "Bow", 0, 20, 40, 0));
+        // room 2 (normal monster)
+        objects[2].push_back(new Monster("Red Slime", 50, 0, 40, 10));
+        objects[2].push_back(new Item("Shadow Belle", "Necklace", 0, 0, 15, 0));
+        // room 3 (NPC: merchant)
+        objects[3].push_back(new Monster("Annoying Friend", 150, 0, 5, 0));
+        objects[3].push_back(new NPC("Your Friend's Steve", "Dododo~ do~ dodo~ do~ Steveeeee!", products[0]));
+        objects[3].push_back(new Item("Iron Boots", "Boots", 0, 0, 15, 0));
+        // room 5 (NPC: priest)
+        objects[5].push_back(new Monster("Women's Right General", 100, 0, 40, 10));
+        objects[5].push_back(new NPC("The Priest", "Yorokobe syounen. Kimi no moti nozomi wa youyaku kanou.......", products[1]));
+        objects[5].push_back(new Item("Iron Shield", "Shield", 0, 0, 0, 20));
+        // room 6 (Little Boss: Dragon)
+        objects[6].push_back(new Monster("Blue-Eyes White Dragon", 200, 0, 60, 20));
+        switch (rand() % 6)
+        {
+        case 0:
+            objects[6].push_back(new Item("Abyss Shriek", "Helmet", 30, 30, 70, 40));
+            break;
+        case 1:
+            objects[6].push_back(new Item("Mothwing Cloak", "Armor", 50, 20, 30, 50));
+            break;
+        case 2:
+            objects[6].push_back(new Item("Shade Cloak", "Pants", 30, 100, 30, 0));
+            break;
+        case 3:
+            objects[6].push_back(new Item("Isma's Tear", "Necklace", 30, 100, 30, 0));
+            break;
+        case 4:
+            objects[6].push_back(new Item("Monarch Wings", "Boots", 30, 100, 30, 0));
+            break;
+        case 5:
+            objects[6].push_back(new Item("Dreamshield", "Shield", 40, 0, 0, 100));
+            break;
+        default:
+            break;
+        }
+        // room 7 (Treasure Room & Gilles de Rais Easter Egg)
+        objects[7].push_back(new Monster("Goblin", 60, 0, 20, 15));
+        objects[7].push_back(new NPC("Gilles de Rais", "I am Gilles de Rais, and I have come to you at your invitation. From here on, I shall be at your command.", products[2]));
+        objects[7].push_back(treasure[player.getOccupation()]);
+        // room 8 (normal monster)
+        objects[8].push_back(new Monster("Ghost", 40, 0, 20, 20));
+        objects[8].push_back(new Item("Iron Sword", "Sword", 15, 0, 30, 15));
+        // room 9 (the Altar)
+        objects[9].push_back(new Item("Altar", "Altar", 0, 0, 0, 0));
+        // room 10 (normal monster)
+        objects[10].push_back(new Monster("Alien", 100, 0, 30, 0));
+        // room 11 (NPC: the Wariior)
+        objects[11].push_back(new NPC("The Great Warrior", "Choose one quipment and defeat the BOSS!!!!", products[3]));
+        // room 12 (normal monster)
+        objects[12].push_back(new Monster("Goblin", 60, 0, 20, 15));
+        objects[12].push_back(new Item("Iron Axe", "Axe", 0, 0, 30, 20));
+        // room 13 (secret room)
+        objects[13].push_back(new Item("Lock", "Lock", 0, 0, 0, 0));
+        objects[13].push_back(new NPC("Jeanne d'Arc", "Hello! Hahaha, someone must mistake you for me.", products[4]));
+        objects[13].push_back(artifact[player.getOccupation()]);
+        // room 14 (trap)
+        objects[14].push_back(new Item("Trap", "Trap", 0, 0, 0, 0));
+        objects[14].push_back(new Monster("The Abyss", 200, 0, 50, 15));
+        // room 15 (Boss: )
+        objects[15].push_back(new Monster("The Baphomet", 500, 0, 70, 15));
+        for (int i = 0; i < 16; i++)
+        {
+            Room r(0, i, objects[i]);
+            rooms.push_back(r);
+        }
+        player.setCurrentRoom(&rooms[0]);
     }
-    // room 7 (Treasure Room & Gilles de Rais Easter Egg)
-    objects[7].push_back(new Monster("Goblin", 60, 0, 20, 15));
-    objects[7].push_back(new NPC("Gilles de Rais", "\033[1;36mI am Gilles de Rais, and I have come to you at your invitation. From here on, I shall be at your command.\033[0m", products[2]));
-    objects[7].push_back(treasure[player.getOccupation()]);
-    // room 8 (normal monster)
-    objects[8].push_back(new Monster("Ghost", 40, 0, 20, 20));
-    objects[8].push_back(new Item("Iron Sword", "Sword", 15, 0, 30, 15));
-    // room 9 (the Altar)
-    objects[9].push_back(new Item("Altar", "Altar", 0, 0, 0, 0));
-    // room 10 (normal monster)
-    objects[10].push_back(new Monster("Alien", 100, 0, 30, 0));
-    // room 11 (NPC: the Wariior)
-    objects[11].push_back(new NPC("The Great Warrior", "\033[1;36mChoose one quipment and defeat the BOSS!!!!\033[0m", products[3]));
-    // room 12 (normal monster)
-    objects[12].push_back(new Monster("Goblin", 60, 0, 20, 15));
-    objects[12].push_back(new Item("Iron Axe", "Axe", 0, 0, 30, 20));
-    // room 13 (secret room)
-    objects[13].push_back(new Item("Lock", "Lock", 0, 0, 0, 0));
-    objects[13].push_back(new NPC("\033[1;33mJeanne d'Arc\033[0m", "\033[1;36mHello! Hahaha, someone must mistake you for me.\033[0m", products[4]));
-    objects[13].push_back(artifact[player.getOccupation()]);
-    // room 14 (trap)
-    objects[14].push_back(new Item("Trap", "Trap", 0, 0, 0, 0));
-    objects[14].push_back(new Monster("\033[0;32;31mThe Abyss\033[m", 200, 0, 50, 15));
-    // room 15 (Boss: )
-    objects[15].push_back(new Monster("\033[0;32;31mThe Baphomet\033[m", 500, 0, 70, 15));
-    for (int i = 0; i < 16; i++)
-    {
-        Room r(0, i, objects[i]);
-        rooms.push_back(r);
-    }
-    player.setCurrentRoom(&rooms[0]);
     // set room 0
     rooms[0].setUpRoom(&rooms[3]);
     rooms[0].setLeftRoom(&rooms[1]);
@@ -326,13 +330,13 @@ void Dungeon::handleEvent(Object *object)
 
         if (object->triggerEvent(&player)) // if monster is dead
         {
-            if (object->getName() == "\033[1;36mBlue-Eyes White Dragon\033[m")
+            if (object->getName() == "Blue-Eyes White Dragon")
             {
                 player.setCoin(player.getCoin() + 30);
                 cout << "\033[1;33m(Something special things was dropped from the dragon)\033[m\n";
                 cout << "\n\033[1;33mCongratulaitons!! Dragon is dead!!\033[m\nYou get 30 coins.\n";
             }
-            else if (object->getName() == "\033[0;32;31mThe Baphomet\033[m")
+            else if (object->getName() == "The Baphomet")
             {
                 cout << "\033[2J";
                 cout << "\n\033[1;33mCongratulaitons!! The boss is dead!!\nYou can get out of the dungeon now!\033[m\n";
@@ -981,7 +985,7 @@ void Dungeon::handleMap()
 /* Including create player, create map etc  */
 void Dungeon::startGame()
 {
-
+    Record record;
     char sel;
     cout << "\033[2J";
     cout << "\033[1;33mDo you want to enter the Dungeon? (Y/N)\033[m\n"
@@ -997,13 +1001,45 @@ void Dungeon::startGame()
         cout << "Ok, fine. Bye...\n";
         return;
     }
-    createPlayer();
+    record.loadFromFile(&player,rooms);
+    if(player.getName() == "")
+    {
+        createPlayer();
+        rooms.clear();
+        cout << "\n\033[1;33mFriendly Remind :\033[m \n"
+            << " > Beat a Monster can earn 10 coins.\n"
+            << " > You can use money to trade with NPC.\n"
+            << " > You can't use weapons that don't correspond to your class.\n"
+            << " > There's some SECRETs within the whole dungeon. Try to find all of it if you can.\n\n\033[1;33mGood Luck!!!\033[m\n\n---------------------------------------------------------\n\n";
+    }
+    else
+    {
+        char sel2;
+        cout << "\033[1;33m\n\nDo you want to back to the last place you play? (Y/N)\033[m\n"
+         << "\nYour Choice: ";
+        cin >> sel2;
+        while (sel2 != 'Y' && sel2 != 'y' && sel2 != 'N' && sel2 != 'n')
+        {
+            cout << "\n\033[0;32;31mINVALID INPUT!!!\033[m\nLet's try again. Do you want to back to the last place you play? (Y/N)\n\nYour Choice: ";
+            cin >> sel;
+        }
+        if (sel2 == 'N' || sel2 == 'n')
+        {
+            ofstream file1(path1,ios::trunc); //* delete the previous data
+            ofstream file2(path2,ios::trunc); //* delete the previous data
+            file1.close();
+            file2.close();
+            createPlayer();
+            rooms.clear();
+            cout << "\n\033[1;33mFriendly Remind :\033[m \n"
+                << " > Beat a Monster can earn 10 coins.\n"
+                << " > You can use money to trade with NPC.\n"
+                << " > You can't use weapons that don't correspond to your class.\n"
+                << " > There's some SECRETs within the whole dungeon. Try to find all of it if you can.\n\n\033[1;33mGood Luck!!!\033[m\n\n---------------------------------------------------------\n\n";
+        }
+    }
+    player.triggerEvent(&player);
     createMap();
-    cout << "\n\033[1;33mFriendly Remind :\033[m \n"
-    << " > Beat a Monster can earn 10 coins.\n"
-    << " > You can use money to trade with NPC.\n"
-    << " > You can't use weapons that don't correspond to your class.\n"
-    << " > There's some SECRETs within the whole dungeon. Try to find all of it if you can.\n\n\033[1;33mGood Luck!!!\033[m\n\n---------------------------------------------------------\n\n";
 }
 
 /* Deal with the player's action     */
@@ -1045,7 +1081,10 @@ void Dungeon::chooseAction(vector<Object *> things)
         else
         {
             cout << "\n\033[1;33mYou encounter a monster. What do you want to do?\033[m\n";
-            cout << option << ". Fight with " << things[0]->getName() << endl;
+            if(things[0]->getName() == "Blue-Eyes White Dragon")
+                cout << option << ". Fight with \033[1;36m" << things[0]->getName() << "\033[m"<< endl;
+            else
+                cout << option << ". Fight with " << things[0]->getName() << endl;
             decision[option] = 'f'; // stand for fight
             decision[option + 32] = 'f';
             item[option] = 0;
@@ -1222,7 +1261,7 @@ void Dungeon::chooseAction(vector<Object *> things)
     if(player.checkMap())
     {
         cout << option << ". Show Map\n";
-        decision[option] = 'M'; // stand for MAp
+        decision[option] = 'M'; // stand for Map
         decision[option + 32] = 'M';
         option++;
     }
@@ -1231,9 +1270,12 @@ void Dungeon::chooseAction(vector<Object *> things)
     decision[option + 32] = 's';
     option++;
     cout << option << ". Wear equipment or weapon\n";
-    decision[option] = 'w'; // stand for status
+    decision[option] = 'w'; // stand for weapon
     decision[option + 32] = 'w';
     option++;
+    cout << option << ". Leave the Dungeon\n";
+    decision[option] = 'l'; // stand for leave the Dungeon
+    decision[option + 32] = 'l';
 
     cout << "\nYour choice: ";
     cin >> input;
@@ -1260,6 +1302,35 @@ void Dungeon::chooseAction(vector<Object *> things)
         break;
     case 'M':
         handleMap();
+        break;
+    case 'l':
+        char sel;
+        cout << "\n\033[0;32;31mAre you sure you want to leave the Dungeon? Ans(Y or N):\033[m \n\nYour Choice: ";
+        cin >> sel;
+        while (sel!= 'Y' && sel!= 'y' && sel!= 'N' && sel!= 'n')
+        {
+            cout << "\n\033[0;32;31mINVALID INPUT!!!\033[m\nLet's try again. Do you want to leave the Dungeon? Ans(Y or N): \n\nYour Choice: ";
+            cin >> sel;
+        }
+        if(sel == 'Y' || sel == 'y')
+        {
+            char sel2;
+            cout << "\n\n\033[1;33mDo you want to save the playing record? (Y/N)\n"
+                <<  "You can load the record when next time you enter the Dungeon.\033[m\n"
+                << "\nYour Choice: ";
+            cin >> sel2;
+            while (sel2!= 'Y' && sel2!= 'y' && sel2!= 'N' && sel2!= 'n')
+            {
+                cout << "\n\033[0;32;31mINVALID INPUT!!!\033[m\nLet's try again. Do you want to save the playing record? Ans(Y or N): \n\nYour Choice: ";
+                cin >> sel2;
+            }
+            if(sel2 == 'Y' || sel2 == 'y')
+            {
+                Record record;
+                record.saveToFile(&player,rooms);
+            }
+            player.setCurrentHealth(0);
+        }
         break;
     default:
         break;

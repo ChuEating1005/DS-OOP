@@ -5,7 +5,9 @@
 #include "Player.h"
 #include "Monster.h"
 #include "NPC.h"
-
+#include "Record.h"
+#define path1 "Save_Player.txt"
+#define path2 "Save_Rooms.txt"
 
 using namespace std;
 class Dungeon
