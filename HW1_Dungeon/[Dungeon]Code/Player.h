@@ -16,6 +16,7 @@ private:
     int coin;
     Item weapon;
     pair<string, string> occupation;
+    Skill skills[3];
     Room *currentRoom;
     Room *previousRoom;
     map<string, Item> equipment;
@@ -24,7 +25,6 @@ private:
 public:
     Player();
     Player(string, string, int, int, int, int, int);
-    Skill skill[3];
     void addItem(Item);
     void popItem(string);
     void equip();
@@ -44,18 +44,22 @@ public:
     /* Set & Get function*/
     void setCurrentRoom(Room *);
     void setPreviousRoom(Room *);
-    void setEquipment(map<string, Item>);
     void setBackpack(vector<Item>);
+    void setEquipment(string, Item);
     void setOccupation(string);
+    void setWeapon(Item);
     void setCoin(int);
+    void setSkill(Skill, int);
+    
     Room *getCurrentRoom();
     Room *getPreviousRoom();
-    map<string, Item> getEquipment();
     vector<Item> getBackpack();
+    map<string, Item> getEquipment();
     string getOccupation();
-    int getCoin();
-    string getWeaponType();
     Item getWeapon();
+    string getWeaponType();
+    int getCoin();
+    Skill getSkill(int);
 };
 
 #endif // PLAYER_H_INCLUDED

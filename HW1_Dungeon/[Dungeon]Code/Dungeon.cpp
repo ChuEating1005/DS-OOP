@@ -145,10 +145,10 @@ void Dungeon::createMap()
     // room 0 (start point)
     objects[0].push_back(weapon[player.getOccupation()]);
     // room 1 (normal monster)
-    objects[1].push_back(new Monster("Blue Slime", 40, 0, 20, 5));
+    objects[1].push_back(new Monster("Blue Slime", 40, 0, 40, 5));
     objects[1].push_back(new Item("Cross Bow", "Bow", 0, 20, 40, 0));
     // room 2 (normal monster)
-    objects[2].push_back(new Monster("Red Slime", 50, 0, 30, 10));
+    objects[2].push_back(new Monster("Red Slime", 50, 0, 40, 10));
     objects[2].push_back(new Item("Shadow Belle", "Necklace", 0, 0, 15, 0));
     // room 3 (NPC: merchant)
     objects[3].push_back(new Monster("Annoying Friend", 150, 0, 5, 0));

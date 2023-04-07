@@ -131,16 +131,16 @@ bool Monster::triggerEvent(Object *object)
         option++;
         for (int i = 0; i < 3; i++)
         {
-            if (i == 2 && player->checkEnoughMagic(player->skill[i].getMP()))
+            if (i == 2 && player->checkEnoughMagic(player->getSkill(i).getMP()))
             {
-                cout << option << ". Use Ultimate Skill: " << player->skill[i].getSkillName() << endl;
+                cout << option << ". Use Ultimate Skill: " << player->getSkill(i).getSkillName() << endl;
                 decision[option] = i + 1;
                 decision[option + 32] = i + 1;
                 option++;
             }
-            else if (player->checkEnoughMagic(player->skill[i].getMP()))
+            else if (player->checkEnoughMagic(player->getSkill(i).getMP()))
             {
-                cout << option << ". Use Skill " << i + 1 << ": " << player->skill[i].getSkillName() << endl;
+                cout << option << ". Use Skill " << i + 1 << ": " << player->getSkill(i).getSkillName() << endl;
                 decision[option] = i + 1;
                 decision[option + 32] = i + 1;
                 option++;
@@ -181,29 +181,29 @@ bool Monster::triggerEvent(Object *object)
         case 3:
             if (decision[input] == 3)
                 cout << "\033[2J";
-            player->skill[decision[input] - 1].getScript();
-            if (player->skill[decision[input] - 1].getType().first == "Demage")
+            player->getSkill(decision[input] - 1).getScript();
+            if (player->getSkill(decision[input] - 1).getType().first == "Demage")
             {
-                this->takeDamage(player->skill[decision[input] - 1].getType().second + player_dam);
+                this->takeDamage(player->getSkill(decision[input] - 1).getType().second + player_dam);
                 this->showStatus();
             }
-            else if (player->skill[decision[input] - 1].getType().first == "Heal")
+            else if (player->getSkill(decision[input] - 1).getType().first == "Heal")
             {
-                player->healing(player->skill[decision[input] - 1].getType().second);
+                player->healing(player->getSkill(decision[input] - 1).getType().second);
             }
-            else if (player->skill[decision[input] - 1].getType().first == "ATKup")
+            else if (player->getSkill(decision[input] - 1).getType().first == "ATKup")
             {
-                player->setAttack(player->getAttack() + player->skill[decision[input] - 1].getType().second);
+                player->setAttack(player->getAttack() + player->getSkill(decision[input] - 1).getType().second);
             }
-            else if (player->skill[decision[input] - 1].getType().first == "DEFup")
+            else if (player->getSkill(decision[input] - 1).getType().first == "DEFup")
             {
-                player->setDefense(player->getDefense() + player->skill[decision[input] - 1].getType().second);
+                player->setDefense(player->getDefense() + player->getSkill(decision[input] - 1).getType().second);
             }
-            else if (player->skill[decision[input] - 1].getType().first == "MPup")
+            else if (player->getSkill(decision[input] - 1).getType().first == "MPup")
             {
-                player->setCurrentMagic(player->getCurrentMagic() + player->skill[decision[input] - 1].getType().second);
+                player->setCurrentMagic(player->getCurrentMagic() + player->getSkill(decision[input] - 1).getType().second);
             }
-            player->useMaigc(player->skill[decision[input] - 1].getMP());
+            player->useMaigc(player->getSkill(decision[input] - 1).getMP());
             cout << this->getName() << "\'s attack does " << monster_dam << " damage\n\n";
             player->takeDamage(monster_dam);
             cout << "\n------------------";

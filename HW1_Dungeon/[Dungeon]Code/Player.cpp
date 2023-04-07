@@ -2,87 +2,76 @@
 
 // constructor
 Player::Player()
-    : GameCharacter("", "Player", 0, 0, 0, 0), coin(0), currentRoom(NULL), previousRoom(NULL)
+    : GameCharacter("", "Player", 0, 0, 0, 0)
 {
+    setCoin(0);
+    setCurrentRoom(NULL);
+    setPreviousRoom(NULL);
     setOccupation("Empty");
-    occupation = make_pair("Empty","Empty");
-    weapon = Item("Empty","Empty",0,0,0,0);
-    equipment["Helmet"] = Item("Empty", "Helmet", 0, 0, 0, 0);
-    equipment["Necklace"] = Item("Empty", "Necklace", 0, 0, 0, 0);
-    equipment["Armor"] = Item("Empty", "Armor", 0, 0, 0, 0);
-    equipment["Shield"] = Item("Empty", "Shield", 0, 0, 0, 0);
-    equipment["Pants"] = Item("Empty", "Pants", 0, 0, 0, 0);
-    equipment["Boots"] = Item("Empty", "Boots", 0, 0, 0, 0);
+    setWeapon(Item("Empty","Empty",0,0,0,0));
+    string part[7] = {"Helmet", "Necklace", "Armor", "Shield", "Pants", "Boots"};
+    for(int i = 0; i < 6; i++) setEquipment(part[i],Item("Empty", part[i], 0, 0, 0, 0));
 }
 Player::Player(string name, string occupation, int maxHealth, int maxMagic, int attack, int defense, int money)
-    : GameCharacter(name, "Player", maxHealth, maxMagic, attack, defense), coin(money)
+    : GameCharacter(name, "Player", maxHealth, maxMagic, attack, defense)
 {
-    backpack.clear();
-    currentRoom = NULL;
-    previousRoom = NULL;
+    string part[7] = {"Helmet", "Necklace", "Armor", "Shield", "Pants", "Boots"};
+    map<string, string> w;
+    w["Saber"] = "Sword";
+    w["Archer"] = "Bow";
+    w["Lancer"] = "Lance";
+    w["Caster"] = "Staff";
+    w["Assassin"] = "Dragger";
+    w["Rider"] = "Whip";
+    w["Berserker"] = "Axe";
+    for(int i = 0; i < 6; i++) setEquipment(part[i], Item("Empty", part[i], 0, 0, 0, 0));
+    setCoin(money);
+    setCurrentRoom(NULL);
+    setPreviousRoom(NULL);
     setOccupation(occupation);
+    setWeapon(Item("Empty", w[occupation], 0, 0, 0, 0));
     if (occupation == "Saber")
     {
-        this->occupation = make_pair("Saber","Sword");
-        this->weapon = Item("Empty", "Sword", 0, 0, 0, 0);
-        this->skill[0] = Skill("Karisuma", "ATKup", 10, 10, "Attack UP!\n");
-        this->skill[1] = Skill("Kagayakeru Michi", "MPup", 10, 0, "MP up up!!\n");
-        this->skill[2] = Skill("Excalibur", "Demage", 100, 40, "\n\033[1;33m「───束ねるは星の息吹、輝ける命の奔流。受けるが良い!『約束された勝利の剣 (エクスカリバー) 』ーーー！！」\033[m");
+        setSkill(Skill("Karisuma", "ATKup", 10, 10, "Attack UP!\n"),0);
+        setSkill(Skill("Kagayakeru Michi", "MPup", 10, 0, "MP up up!!\n"),1);
+        setSkill(Skill("Excalibur", "Demage", 100, 40, "\n\033[1;33m「───束ねるは星の息吹、輝ける命の奔流。受けるが良い!『約束された勝利の剣 (エクスカリバー) 』ーーー！！」\033[m"),2);
     }
     else if (occupation == "Archer")
     {
-        this->occupation = make_pair("Archer","Bow");
-        this->weapon = Item("Empty", "Bow", 0, 0, 0, 0);
-        this->skill[0] = Skill("Shinig", "Heal", 30, 5, "Heal\n");
-        this->skill[1] = Skill("Gate of Babylon", "MPup", 20, 0, "MP up up!!\n");
-        this->skill[2] = Skill("Enuma Elish", "Demage", 150, 40, "\033[1;33m\n「───裁きの時だ。世界を割くは我が乖離剣。受けよ! 『天地乖離す開闢の星(エヌマ・エリシュ)』ーーー！！」\033[m\n");
+        setSkill(Skill("Shinig", "Heal", 30, 5, "Heal\n"), 0);
+        setSkill(Skill("Gate of Babylon", "MPup", 20, 0, "MP up up!!\n"), 1);
+        setSkill(Skill("Enuma Elish", "Demage", 150, 40, "\033[1;33m\n「───裁きの時だ。世界を割くは我が乖離剣。受けよ! 『天地乖離す開闢の星(エヌマ・エリシュ)』ーーー！！」\033[m\n"), 2);
     }
     else if (occupation == "Lancer")
     {
-        this->occupation = make_pair("Lancer","Lance");
-        this->weapon = Item("Empty", "Lance", 0, 0, 0, 0);
-        this->skill[0] = Skill("Karisuma", "ATKup", 10, 5, "Attack UP!\n");
-        this->skill[1] = Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!");
-        this->skill[2] = Skill("Gae Bulg", "Demage", 150, 40, "\033[1;33m\n「───刺し穿ち……突き穿つ! 『貫き穿つ死翔の槍 (ゲイ･ボルク･オルタナティブ)』ーーー! ! 」\033[m\n");
+        setSkill(Skill("Karisuma", "ATKup", 10, 5, "Attack UP!\n"), 0);
+        setSkill(Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!"), 1);
+        setSkill(Skill("Gae Bulg", "Demage", 150, 40, "\033[1;33m\n「───刺し穿ち……突き穿つ! 『貫き穿つ死翔の槍 (ゲイ･ボルク･オルタナティブ)』ーーー! ! 」\033[m\n"), 2);
     }
     else if (occupation == "Caster")
     {
-        this->occupation = make_pair("Caster","Staff");
-        this->weapon = Item("Empty", "Staff", 0, 0, 0, 0);
-        this->skill[0] = Skill("Eiyuu Sakusei", "DEFup", 30, 30, "DEF UP!\n");
-        this->skill[1] = Skill("Bless of Avalon", "MPup", 30, 0, "MP up up!!");
-        this->skill[2] = Skill("Garden of Avalon", "ATKup", 50, 50, "....");
+        setSkill(Skill("Eiyuu Sakusei", "DEFup", 30, 30, "DEF UP!\n"), 0);
+        setSkill(Skill("Bless of Avalon", "MPup", 30, 0, "MP up up!!"), 1);
+        setSkill(Skill("Garden of Avalon", "ATKup", 50, 50, "...."), 2);
     }
     else if (occupation == "Assassin")
     {
-        this->occupation = make_pair("Assassin","Dragger");
-        this->weapon = Item("Empty", "Dragger", 0, 0, 0, 0);
-        this->skill[0] = Skill("maryoku souten", "ATKup", 10, 5, "Attack UP!\n");
-        this->skill[1] = Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!");
-        this->skill[2] = Skill("Tubame Gaesi", "Demage", 50, 10, "Tubame Gaesi");
+        setSkill(Skill("maryoku souten", "ATKup", 10, 5, "Attack UP!\n"), 0);
+        setSkill(Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!"), 1);
+        setSkill(Skill("Tubame Gaesi", "Demage", 50, 10, "Tubame Gaesi"), 2);
     }
     else if (occupation == "Rider")
     {
-        this->occupation = make_pair("Rider","Whip");
-        this->weapon = Item("Empty", "Whip", 0, 0, 0, 0);
-        this->skill[0] = Skill("Karisuma", "ATKup", 10, 5, "Attack UP!\n");
-        this->skill[1] = Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!");
-        this->skill[2] = Skill("Excalibur", "Demage", 50, 10, "Ex.......caliburrrrrr!!!!!!!!!\n");
+        setSkill(Skill("Karisuma", "ATKup", 10, 5, "Attack UP!\n"), 0);
+        setSkill(Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!"), 1);
+        setSkill(Skill("Excalibur", "Demage", 50, 10, "Ex.......caliburrrrrr!!!!!!!!!\n"), 2);
     }
     else if (occupation == "Berserker")
     {
-        this->occupation = make_pair("Berserker","Axe");
-        this->weapon = Item("Empty", "Axe", 0, 0, 0, 0);
-        this->skill[0] = Skill("Karisuma", "ATKup", 10, 5, "Attack UP!\n");
-        this->skill[1] = Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!");
-        this->skill[2] = Skill("Excalibur", "Demage", 50, 10, "Ex.......caliburrrrrr!!!!!!!!!\n");
+        setSkill(Skill("Karisuma", "ATKup", 10, 5, "Attack UP!\n"), 0);
+        setSkill(Skill("Kagayakeru Michi", "MPup", 5, 0, "MP up up!!"), 1);
+        setSkill(Skill("Excalibur", "Demage", 50, 10, "Ex.......caliburrrrrr!!!!!!!!!\n"), 2);
     }
-    equipment["Helmet"] = Item("Empty", "Helmet", 0, 0, 0, 0);
-    equipment["Necklace"] = Item("Empty", "Necklace", 0, 0, 0, 0);
-    equipment["Armor"] = Item("Empty", "Armor", 0, 0, 0, 0);
-    equipment["Shield"] = Item("Empty", "Shield", 0, 0, 0, 0);
-    equipment["Pants"] = Item("Empty", "Pants", 0, 0, 0, 0);
-    equipment["Boots"] = Item("Empty", "Boots", 0, 0, 0, 0);
 }
 
 // basic function
@@ -352,9 +341,9 @@ void Player::setPreviousRoom(Room *prev)
 {
     this->previousRoom = prev;
 }
-void Player::setEquipment(map<string, Item> equipment)
+void Player::setEquipment(string part, Item equipment)
 {
-    this->equipment = equipment;
+    this->equipment[part] = equipment;
 }
 void Player::setBackpack(vector<Item> backpack)
 {
@@ -362,7 +351,30 @@ void Player::setBackpack(vector<Item> backpack)
 }
 void Player::setOccupation(string name)
 {
-    this->occupation.first = name;
+    if(name == "Saber")
+        this->occupation = make_pair("Saber","Sword");
+    else if(name == "Archer")
+        this->occupation = make_pair("Archer","Bow");
+    else if(name == "Lancer")
+        this->occupation = make_pair("Lancer","Lance");
+    else if(name == "Caster")
+        this->occupation = make_pair("Caster","Staff");
+    else if(name == "Assassin")
+        this->occupation = make_pair("Assassin","Dragger");
+    else if(name == "Rider")
+        this->occupation = make_pair("Rider","Whip");
+    else if(name == "Berserker")
+        this->occupation = make_pair("Berserker","Axe");
+    else
+        this->occupation = make_pair("Empty","Empty");
+}
+void Player::setSkill(Skill skill, int i)
+{
+    this->skills[i] = skill;
+}
+void Player::setWeapon(Item weapon)
+{
+    this->weapon = weapon;
 }
 void Player::setCoin(int money)
 {
@@ -388,10 +400,6 @@ string Player::getOccupation()
 {
     return occupation.first;
 }
-int Player::getCoin()
-{
-    return coin;
-}
 string Player::getWeaponType()
 {
     return occupation.second;
@@ -400,4 +408,11 @@ Item Player::getWeapon()
 {
     return weapon;
 }
-
+int Player::getCoin()
+{
+    return coin;
+}
+Skill Player::getSkill(int i)
+{
+    return skills[i];
+}
