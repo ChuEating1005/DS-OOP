@@ -21,9 +21,9 @@ bool GameCharacter::checkIsDead()
     else
         return false;
 }
-void GameCharacter::takeDamage(int demage)
+void GameCharacter::takeDamage(int damage)
 {
-    setCurrentHealth(getCurrentHealth() - demage);
+    setCurrentHealth(getCurrentHealth() - damage);
 }
 void GameCharacter::healing(int heal)
 {

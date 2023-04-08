@@ -375,7 +375,7 @@ void Dungeon::handleEvent(Object *object)
             Item* item = dynamic_cast<Item*>(object);
             map<string,string> tran;
             tran["Sword"] = tran["Bow"] = tran["Lance"] = tran["Staff"] = tran["Dagger"] = tran["Whip"] = tran["Axe"] = "Weapon";
-            tran["Pants"] = tran["Armor"] = tran["Helmat"] = tran["Boots"] = tran["Necklace"] = tran["Shield"] = "Equipment";
+            tran["Pants"] = tran["Armor"] = tran["Helmet"] = tran["Boots"] = tran["Necklace"] = tran["Shield"] = "Equipment";
             char sel1;
             if( item->getTag() != "Key" || item->getTag() != "Item")
             {
@@ -1002,6 +1002,7 @@ void Dungeon::startGame()
         return;
     }
     record.loadFromFile(&player,rooms);
+    cout << endl;
     if(player.getName() == "")
     {
         createPlayer();

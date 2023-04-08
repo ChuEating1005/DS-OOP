@@ -182,7 +182,7 @@ bool Monster::triggerEvent(Object *object)
             if (decision[input] == 3)
                 cout << "\033[2J";
             player->getSkill(decision[input] - 1).getScript();
-            if (player->getSkill(decision[input] - 1).getType().first == "Demage")
+            if (player->getSkill(decision[input] - 1).getType().first == "Damage")
             {
                 this->takeDamage(player->getSkill(decision[input] - 1).getType().second + player_dam);
                 this->showStatus();

@@ -13,9 +13,11 @@ void Record::savePlayer(Player* player, ofstream& file)
         << " " << player->getWeapon().getHealth() << " " << player->getWeapon().getMagic()
         << " " << player->getWeapon().getAttack() << " " << player->getWeapon().getDefense() << endl;
     for(int i = 0; i < 6; i++)
+    {
         file << player->getEquipment()[part[i]].getName() << "\n" << player->getEquipment()[part[i]].getTag()
         << " " << player->getEquipment()[part[i]].getHealth() << " " << player->getEquipment()[part[i]].getMagic()
         << " " << player->getEquipment()[part[i]].getAttack() << " " << player->getEquipment()[part[i]].getDefense() << endl;
+    }
     file << player->getBackpack().size() << endl;
     for(auto& item : player->getBackpack()) 
     {
@@ -66,7 +68,7 @@ void Record::loadPlayer(Player* player, ifstream& file, vector<Room>& rooms)
     string part[7] = {"Helmet", "Necklace", "Armor", "Shield", "Pants", "Boots"};
 
     string name , occupation;
-    int maxHealth, maxMagic, attack, defense, coin;
+    int maxHealth(0), maxMagic(0), attack(0), defense(0), coin(0);
     getline(file,name);
     file >> occupation >> maxHealth >> maxMagic >> attack >> defense >> coin;
     player->setName(name);
